@@ -141,11 +141,11 @@ export default function SingleMail(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            This actions is irreversible, are you sure you want to continue?
+            This action is irreversible, Are you sure you want to continue?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="secondary">
+          <Button onClick={handleClose} color="primary">
             No
           </Button>
           <Button onClick={handleDelete} color="primary" autoFocus>
