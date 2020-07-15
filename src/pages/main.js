@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  refreshButton:{
+     color: "white", marginLeft: "auto" 
+  }
 }));
 
 function MainDrawer(props) {
@@ -93,10 +96,12 @@ function MainDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  const handleDrawerClose = () => {
+    setMobileOpen(false);
+  };
   const drawer = (
     <div>
-      <Sidebar />
+      <Sidebar onClose={handleDrawerClose}/>
     </div>
   );
 
@@ -121,7 +126,7 @@ function MainDrawer(props) {
             Hello {userName}
           </Typography>
           <IconButton
-            style={{ color: "white", marginLeft: "auto" }}
+            className={classes.refreshButton}
             size="medium"
             aria-label="refresh mailboxes"
             component="span"

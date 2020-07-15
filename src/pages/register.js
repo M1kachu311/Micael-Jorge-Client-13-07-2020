@@ -51,6 +51,8 @@ export default function Register() {
   const [message, setMessage] = useState(null);
   const onSubmit = (event)=>{
     event.preventDefault();
+    setError(null);
+    setMessage(null);
     if(!username || !password || !passwordVerify){
       setError('All fields are mandatory');
 

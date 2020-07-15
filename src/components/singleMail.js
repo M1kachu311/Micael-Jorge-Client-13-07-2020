@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import { makeStyles } from "@material-ui/core/styles";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -13,6 +14,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Box from "@material-ui/core/Box";
 import { useSelector } from "react-redux";
 import { deleteEmailById } from "../api/messages";
 
@@ -25,9 +27,27 @@ const useStyles = makeStyles((theme) => ({
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
     alignSelf: "center",
   },
+  dateText: {
+    fontSize: theme.typography.pxToRem(10),
+    color: theme.palette.text.secondary,
+    alignSelf: "center",
+    marginLeft: "auto",
+  },
+  alignRigth: {
+    marginLeft: "auto",
+  },
+  htmlDiv: {
+    width: "100%"
+  },
+  dashedBorder:{
+    border:"1px dashed rgba(0, 0, 0, .125)",
+    padding:'1em'
+  },
+  acordeonDiv:{
+    marginRight: "5px", marginBottom: "10px"
+  }
 }));
 
 export default function SingleMail(props) {
@@ -61,7 +81,7 @@ export default function SingleMail(props) {
   return (
     <div>
       <Accordion
-        style={{ marginRight: "5px", marginBottom: "10px" }}
+        className={classes.acordeonDiv}
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}
       >
@@ -77,9 +97,10 @@ export default function SingleMail(props) {
           <Typography className={classes.secondaryHeading}>
             {props.data.subject}
           </Typography>
+
           <IconButton
-            style={{ marginLeft: "auto" }}
-            size="medium"
+            className={classes.alignRigth}
+            size="small"
             aria-label="delete selected"
             component="span"
             color="primary"
@@ -91,13 +112,23 @@ export default function SingleMail(props) {
             <DeleteIcon />
           </IconButton>
         </AccordionSummary>
-        <AccordionDetails
-          style={{ borderTop: "1px solid rgba(0, 0, 0, .125)" }}
-        >
-          <div
-            style={{ width: "100%" }}
-            dangerouslySetInnerHTML={{ __html: props.data.content }}
-          />
+        <AccordionDetails >
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            width="100%"
+            className={classes.dashedBorder}
+          >
+            <Typography className={classes.dateText}>
+              {moment(props.data.start_date).format("MMM DD")}
+            </Typography>
+            <div
+              className={classes.htmlDiv}
+              dangerouslySetInnerHTML={{ __html: props.data.content }}
+            />
+          </Box>
         </AccordionDetails>
       </Accordion>
       <Dialog

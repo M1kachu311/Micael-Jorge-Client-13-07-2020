@@ -65,6 +65,7 @@ export default function SignIn() {
           setError(data.error);
           setPassword('')
         } else {
+          setError(null)
           dispatch(login(data.token,username));
           dispatch(goToInbox());
           history.push("/");

@@ -31,12 +31,13 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
-  },
+  }
 }));
 
 export default function NewMailForm(props) {
   const classes = useStyles();
   const token = useSelector((state) => state.auth.token);
+  const username = useSelector((state) => state.auth.username);
   const [recipient, setRecipient] = useState("");
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
@@ -69,9 +70,20 @@ export default function NewMailForm(props) {
   return (
     <div className={classes.layout}>
       <Typography variant="h6" gutterBottom>
-        Compose New Mail
+        Compose New Message
       </Typography>
       <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <TextField
+            required
+            id="sender"
+            label="Sender"
+            fullWidth
+            autoComplete="sender"
+            value={username}
+            disabled
+          />
+        </Grid>
         <Grid item xs={12}>
           <TextField
             required
@@ -101,6 +113,10 @@ export default function NewMailForm(props) {
             init={{
               height: 250,
               menubar: false,
+              resize:false,
+              mobile:{
+                toolbar_mode:"floating"
+              },
               plugins: [
                 "advlist autolink lists link image charmap print preview anchor",
                 "searchreplace visualblocks code fullscreen",

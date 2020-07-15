@@ -20,11 +20,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Sidebar() {
+export default function Sidebar(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selectedPage=useSelector(state=>state.mailbox.selectedPage)
   const handleLogout = (e) => {
+    props.onClose();
     dispatch(clearMails());
     dispatch(logout());
   };
@@ -34,6 +35,7 @@ export default function Sidebar() {
      <Divider />
       <List component="nav" aria-label="main mailbox folders">
       <ListItem selected={selectedPage==="compose"} button onClick={()=>{
+            props.onClose();
           dispatch(goToCompose())
         }}>
           <ListItemIcon>
@@ -42,6 +44,7 @@ export default function Sidebar() {
           <ListItemText primary="Compose" />
         </ListItem>
         <ListItem selected={selectedPage==="inbox"} button onClick={()=>{
+              props.onClose();
           dispatch(goToInbox())
         }}>
           <ListItemIcon>
@@ -50,6 +53,7 @@ export default function Sidebar() {
           <ListItemText primary="Inbox" />
         </ListItem>
         <ListItem selected={selectedPage==="outbox"} button onClick={()=>{
+              props.onClose();
           dispatch(goToOutbox())
         }}>
           <ListItemIcon>
