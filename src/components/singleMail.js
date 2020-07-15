@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     border:"1px dashed rgba(0, 0, 0, .125)",
     padding:'1em'
   },
-  acordeonDiv:{
+  acordeonContainer:{
     marginRight: "5px", marginBottom: "10px"
   }
 }));
@@ -79,9 +79,8 @@ export default function SingleMail(props) {
       });
   };
   return (
-    <div>
+    <div className={classes.acordeonContainer}>
       <Accordion
-        className={classes.acordeonDiv}
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}
       >
