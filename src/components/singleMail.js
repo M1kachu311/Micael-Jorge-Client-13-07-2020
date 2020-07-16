@@ -121,7 +121,7 @@ export default function SingleMail(props) {
             className={classes.dashedBorder}
           >
             <Typography className={classes.dateText}>
-              {moment(props.data.start_date).format("MMM DD")}
+              {moment(props.data.date_created).format("MMM DD")}
             </Typography>
             <div
               className={classes.htmlDiv}
